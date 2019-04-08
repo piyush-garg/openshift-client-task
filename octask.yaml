@@ -4,12 +4,12 @@ metadata:
   name: task-openshift-command
 spec:
   steps:
-  - name: login
+  - name: version
     image: docker.io/piyushgarg/oc-image
     command:
     - /usr/local/bin/oc
     args: ["version"]
-  - name: pods
+  - name: listpods
     image: docker.io/piyushgarg/oc-image
     command:
     - /usr/local/bin/oc

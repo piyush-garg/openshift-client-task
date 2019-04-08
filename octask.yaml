@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: task-openshift-command
+spec:
+  steps:
+  - name: login
+    image: docker.io/piyushgarg/oc-image
+    command:
+    - /usr/local/bin/oc
+    args: ["version"]
+  - name: pods
+    image: docker.io/piyushgarg/oc-image
+    command:
+    - /usr/local/bin/oc
+    args: ["get", "pods"]

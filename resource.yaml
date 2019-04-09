@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: aws-cluster
+spec:
+  type: cluster
+  params:
+    - name: url
+      value: https://api.com

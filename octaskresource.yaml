@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: task-openshift-command
+spec:
+  inputs:
+    resources:
+      - name: clusterdetails
+        type: cluster
+  steps:
+  - name: login
+    image: docker.io/piyushgarg/oc-image
+    command:
+    - /usr/local/bin/oc
+    args: ["login", "-u", "username", "-p", "password, "--insecure-skip-tls-verify=true", "${inputs.resources.clusterdetails.url}"]
+  - name: pods
+    image: docker.io/piyushgarg/oc-image
+    command:
+    - /usr/local/bin/oc
+    args: ["get", "pods"]

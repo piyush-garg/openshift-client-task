@@ -1,0 +1,30 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: task-openshift-command-s
+spec:
+  inputs:
+    resources:
+      - name: clusterdetails
+        type: cluster
+  steps:
+    - name: version
+      image: docker.io/piyushgarg/oc4-image
+      command:
+        - /usr/local/bin/oc
+      args: ["--kubeconfig", "/workspace/${inputs.resources.clusterdetails.name}/kubeconfig", "--context", "${inputs.resources.clusterdetails.name}", "version"]
+    - name: pods
+      image: docker.io/piyushgarg/oc4-image
+      command:
+       - /usr/local/bin/oc
+      args: ["--kubeconfig", "/workspace/${inputs.resources.clusterdetails.name}/kubeconfig", "--context", "${inputs.resources.clusterdetails.name}", "get", "pods"]
+    - name: user
+      image: docker.io/piyushgarg/oc4-image
+      command:
+        - /usr/local/bin/oc
+      args: ["--kubeconfig", "/workspace/${inputs.resources.clusterdetails.name}/kubeconfig", "--context", "${inputs.resources.clusterdetails.name}", "whoami"]
+    - name: status
+      image: docker.io/piyushgarg/oc4-image
+      command:
+        - /usr/local/bin/oc
+      args: ["--kubeconfig", "/workspace/${inputs.resources.clusterdetails.name}/kubeconfig", "--context", "${inputs.resources.clusterdetails.name}", "status"]

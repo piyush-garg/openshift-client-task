@@ -9,7 +9,7 @@ spec:
       command:
         - /usr/local/bin/oc
       args: ["version"]
-    - name: listpods
+    - name: user
       image: docker.io/piyushgarg/oc4-image
       command:
         - /usr/local/bin/oc

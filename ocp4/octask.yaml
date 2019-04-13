@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
   name: task-openshift-command
+  namespace: default
 spec:
   steps:
     - name: version
@@ -14,3 +15,8 @@ spec:
       command:
         - /usr/local/bin/oc
       args: ["whoami"]
+    - name: pods
+      image: docker.io/piyushgarg/oc4-image
+      command:
+        - /usr/local/bin/oc
+      args: ["get", "pods"]
